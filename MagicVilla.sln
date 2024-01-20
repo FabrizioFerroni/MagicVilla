@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MagicVilla_API", "MagicVilla_API\MagicVilla_API.csproj", "{766FDB03-4E02-417C-998F-A105D6FE792C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicVilla_MVC", "MagicVilla_MVC\MagicVilla_MVC.csproj", "{AE306F72-6EDC-45A0-89CE-60A10F954CE2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B4632430-44C0-4CFB-A6E8-7F578782BB7B} = {B4632430-44C0-4CFB-A6E8-7F578782BB7B}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicVilla_Utils", "MagicVilla_Utils\MagicVilla_Utils.csproj", "{B4632430-44C0-4CFB-A6E8-7F578782BB7B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{766FDB03-4E02-417C-998F-A105D6FE792C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{766FDB03-4E02-417C-998F-A105D6FE792C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{766FDB03-4E02-417C-998F-A105D6FE792C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{766FDB03-4E02-417C-998F-A105D6FE792C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE306F72-6EDC-45A0-89CE-60A10F954CE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE306F72-6EDC-45A0-89CE-60A10F954CE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE306F72-6EDC-45A0-89CE-60A10F954CE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE306F72-6EDC-45A0-89CE-60A10F954CE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4632430-44C0-4CFB-A6E8-7F578782BB7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4632430-44C0-4CFB-A6E8-7F578782BB7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4632430-44C0-4CFB-A6E8-7F578782BB7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4632430-44C0-4CFB-A6E8-7F578782BB7B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FBB8C71E-9E43-4B2E-BC56-87722C4E1B75}
+	EndGlobalSection
+EndGlobal
