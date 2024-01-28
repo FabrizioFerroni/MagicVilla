@@ -10,5 +10,6 @@ namespace MagicVilla_MVC.Models.Dto
         [Required(ErrorMessage = "El id de la villa es requerido")]
         public Guid VillaId { get; set; }
         public String DetalleEspecial { get; set; } = "";
+        public VillaDto Villa { get; set; }
     }
 }

@@ -37,7 +37,7 @@ namespace MagicVilla_API.Controllers
         {
             try
             {
-                IEnumerable<NumeroVilla> numeroVillaList = await _numerovillaRepo.ObtenerTodos();
+                IEnumerable<NumeroVilla> numeroVillaList = await _numerovillaRepo.ObtenerTodos(incluirPropiedades: "Villa");
                 var mapper = _mapper.Map<IEnumerable<NumeroVillaResponse>>(numeroVillaList);
                 _logger.LogInformation("Se obtuvieron todas las villas");
                 _response.Data = mapper;
@@ -64,7 +64,7 @@ namespace MagicVilla_API.Controllers
         {
             try
             {
-                var numeroVilla = await _numerovillaRepo.Obtener(v => v.Id.Equals(id), true);
+                var numeroVilla = await _numerovillaRepo.Obtener(v => v.Id.Equals(id), true, incluirPropiedades: "Villa");
 
                 if (numeroVilla == null)
                 {
@@ -134,26 +134,19 @@ namespace MagicVilla_API.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    _response.StatusCode = HttpStatusCode.BadRequest;
-                    _response.IsSuccess = false;
-                    _response.Data = ModelState;
-                    return BadRequest(_response);
+                    return BadRequest(ModelState);
                 }
 
                 if (await _numerovillaRepo.Obtener(v => v.VillaNro == dto.VillaNro, false) != null)
                 {
-                    _response.StatusCode = HttpStatusCode.BadRequest;
-                    _response.IsSuccess = false;
-                    _response.ErrorMensaje = new List<string>() { "La villa con ese numero ya existe" };
-                    return BadRequest(_response);
+                    ModelState.AddModelError("ErrorMensaje", "El numero de Villa  ya existe!");
+                    return BadRequest(ModelState);
                 }
 
                 if (await _villaRepo.Obtener(v => v.Id.Equals(dto.VillaId), false) == null)
                 {
-                    _response.StatusCode = HttpStatusCode.BadRequest;
-                    _response.IsSuccess = false;
-                    _response.ErrorMensaje = new List<string>() { "EL id de la villa no existe" };
-                    return BadRequest(_response);
+                    ModelState.AddModelError("ErrorMensaje", "El Id de la Villa  no existe!");
+                    return BadRequest(ModelState);
                 }
 
                 if (dto == null)
@@ -213,13 +206,11 @@ namespace MagicVilla_API.Controllers
 
                 if (await _villaRepo.Obtener(v => v.Id.Equals(dto.VillaId), false) == null)
                 {
-                    _response.StatusCode = HttpStatusCode.BadRequest;
-                    _response.IsSuccess = false;
-                    _response.ErrorMensaje = new List<string>() { "EL id de la villa no existe" };
-                    return BadRequest(_response);
+                    ModelState.AddModelError("ErrorMensaje", "El Id de la Villa No existe!");
+                    return BadRequest(ModelState);
                 }
 
-                dto.Id = id;
+                    dto.Id = id;
                 NumeroVilla modelo = _mapper.Map<NumeroVilla>(dto);
 
                 modelo.FechaCreacion = numeroVilla.FechaCreacion;
@@ -304,16 +295,16 @@ namespace MagicVilla_API.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{VillaNro}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
-        public async Task<IActionResult> DeleteNumeroVilla(Guid id)
+        public async Task<IActionResult> DeleteNumeroVilla(int VillaNro)
         {
             try
             {
-                var numeroVilla = await _numerovillaRepo.Obtener(nv => nv.Id.Equals(id), true);
+                var numeroVilla = await _numerovillaRepo.Obtener(nv => nv.VillaNro == VillaNro, true);
 
                 if (numeroVilla == null)
                 {

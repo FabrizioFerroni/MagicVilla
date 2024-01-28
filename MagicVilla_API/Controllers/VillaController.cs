@@ -96,19 +96,13 @@ namespace MagicVilla_API.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    _response.StatusCode = HttpStatusCode.BadRequest;
-                    _response.IsSuccess = false;
-                    // _response.ErrorMensaje = new List<String>() {  };
-                    _response.Data = ModelState;
-                    return BadRequest(_response);
+                    return BadRequest(ModelState);
                 }
 
                 if (await _villaRepo.Obtener(v => v.Nombre.ToLower() == dto.Nombre.ToLower(), false) != null)
                 {
-                    _response.StatusCode = HttpStatusCode.BadRequest;
-                    _response.IsSuccess = false;
-                    _response.ErrorMensaje = new List<string>() { "La villa con ese nombre ya existe" };
-                    return BadRequest(_response);
+                    ModelState.AddModelError("ErrorMensaje", "La Villa con ese Nombre ya existe!");
+                    return BadRequest(ModelState);
                 }
 
                 if (dto == null)
