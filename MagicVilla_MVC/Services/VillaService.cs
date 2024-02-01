@@ -15,54 +15,59 @@ namespace MagicVilla_MVC.Services
             _villaUrl = configuration.GetValue<string>("ServiceUrls:Api_url")!;
         }
 
-        public Task<T> Actualizar<T>(VillaUpdateDto dto)
+        public Task<T> Actualizar<T>(VillaUpdateDto dto, string token)
         {
             var ApiRequest = new ApiRequest();
 
             ApiRequest.ApiTipo = DS.ApiTipo.PUT;
             ApiRequest.Datos = dto;
             ApiRequest.Url = $"{_villaUrl}/api/villa/{dto.Id}";
+            ApiRequest.Token = token;
 
             return SendAsync<T>(ApiRequest);
         }
 
-        public Task<T> Crear<T>(VillaCreateDto dto)
+        public Task<T> Crear<T>(VillaCreateDto dto, string token)
         {
             var ApiRequest = new ApiRequest();
 
             ApiRequest.ApiTipo = DS.ApiTipo.POST;
             ApiRequest.Datos = dto;
             ApiRequest.Url= $"{_villaUrl}/api/villa";
+            ApiRequest.Token = token;
 
             return SendAsync<T>(ApiRequest);
         }
 
-        public Task<T> Obtener<T>(string id)
+        public Task<T> Obtener<T>(string id, string token)
         {
             var ApiRequest = new ApiRequest();
 
             ApiRequest.ApiTipo = DS.ApiTipo.GET;
             ApiRequest.Url = $"{_villaUrl}/api/villa/{id}";
+            ApiRequest.Token = token;
 
             return SendAsync<T>(ApiRequest);
         }
 
-        public Task<T> ObtenerTodos<T>()
+        public Task<T> ObtenerTodos<T>(string token)
         {
             var ApiRequest = new ApiRequest();
 
             ApiRequest.ApiTipo = DS.ApiTipo.GET;
             ApiRequest.Url = $"{_villaUrl}/api/villa";
+            ApiRequest.Token = token;
 
             return SendAsync<T>(ApiRequest);
         }
 
-        public Task<T> Remover<T>(string id)
+        public Task<T> Remover<T>(string id, string token)
         {
             var ApiRequest = new ApiRequest();
 
             ApiRequest.ApiTipo = DS.ApiTipo.DELETE;
             ApiRequest.Url = $"{_villaUrl}/api/villa/{id}";
+            ApiRequest.Token = token;
 
             return SendAsync<T>(ApiRequest);
         }
