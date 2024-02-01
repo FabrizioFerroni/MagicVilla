@@ -21,7 +21,7 @@ namespace MagicVilla_MVC.Services
 
             ApiRequest.ApiTipo = DS.ApiTipo.PUT;
             ApiRequest.Datos = dto;
-            ApiRequest.Url = $"{_villaUrl}/api/villa/{dto.Id}";
+            ApiRequest.Url = $"{_villaUrl}/api/v1/villa/{dto.Id}";
             ApiRequest.Token = token;
 
             return SendAsync<T>(ApiRequest);
@@ -33,7 +33,7 @@ namespace MagicVilla_MVC.Services
 
             ApiRequest.ApiTipo = DS.ApiTipo.POST;
             ApiRequest.Datos = dto;
-            ApiRequest.Url= $"{_villaUrl}/api/villa";
+            ApiRequest.Url= $"{_villaUrl}/api/v1/villa";
             ApiRequest.Token = token;
 
             return SendAsync<T>(ApiRequest);
@@ -44,7 +44,7 @@ namespace MagicVilla_MVC.Services
             var ApiRequest = new ApiRequest();
 
             ApiRequest.ApiTipo = DS.ApiTipo.GET;
-            ApiRequest.Url = $"{_villaUrl}/api/villa/{id}";
+            ApiRequest.Url = $"{_villaUrl}/api/v1/villa/{id}";
             ApiRequest.Token = token;
 
             return SendAsync<T>(ApiRequest);
@@ -55,7 +55,7 @@ namespace MagicVilla_MVC.Services
             var ApiRequest = new ApiRequest();
 
             ApiRequest.ApiTipo = DS.ApiTipo.GET;
-            ApiRequest.Url = $"{_villaUrl}/api/villa";
+            ApiRequest.Url = $"{_villaUrl}/api/v1/villa";
             ApiRequest.Token = token;
 
             return SendAsync<T>(ApiRequest);
@@ -66,7 +66,7 @@ namespace MagicVilla_MVC.Services
             var ApiRequest = new ApiRequest();
 
             ApiRequest.ApiTipo = DS.ApiTipo.DELETE;
-            ApiRequest.Url = $"{_villaUrl}/api/villa/{id}";
+            ApiRequest.Url = $"{_villaUrl}/api/v1/villa/{id}";
             ApiRequest.Token = token;
 
             return SendAsync<T>(ApiRequest);

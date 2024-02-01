@@ -9,11 +9,12 @@ using System.Net;
 using Microsoft.AspNetCore.Authorization;
 using System.Data;
 
-namespace MagicVilla_API.Controllers
+namespace MagicVilla_API.Controllers.V1
 {
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     [Authorize]
+    [ApiVersion("1.0")]
     public class NumeroVillaController : ControllerBase
     {
         private readonly ILogger<NumeroVillaController> _logger;
@@ -85,7 +86,7 @@ namespace MagicVilla_API.Controllers
                 _response.StatusCode = HttpStatusCode.OK;
                 return Ok(_response);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 _response.StatusCode = HttpStatusCode.InternalServerError;
                 _response.IsSuccess = false;
@@ -120,7 +121,7 @@ namespace MagicVilla_API.Controllers
                 _response.StatusCode = HttpStatusCode.OK;
                 return Ok(_response);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 _response.StatusCode = HttpStatusCode.InternalServerError;
                 _response.IsSuccess = false;
@@ -175,7 +176,7 @@ namespace MagicVilla_API.Controllers
 
                 return StatusCode(StatusCodes.Status201Created, _response);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 _response.StatusCode = HttpStatusCode.InternalServerError;
                 _response.IsSuccess = false;
@@ -218,7 +219,7 @@ namespace MagicVilla_API.Controllers
                     return BadRequest(ModelState);
                 }
 
-                    dto.Id = id;
+                dto.Id = id;
                 NumeroVilla modelo = _mapper.Map<NumeroVilla>(dto);
 
                 modelo.FechaCreacion = numeroVilla.FechaCreacion;
@@ -231,7 +232,7 @@ namespace MagicVilla_API.Controllers
 
                 return Ok(_response);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 _response.StatusCode = HttpStatusCode.InternalServerError;
                 _response.IsSuccess = false;
@@ -295,7 +296,7 @@ namespace MagicVilla_API.Controllers
 
                 return Ok(_response);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 _response.StatusCode = HttpStatusCode.InternalServerError;
                 _response.IsSuccess = false;
@@ -331,7 +332,7 @@ namespace MagicVilla_API.Controllers
 
                 return Ok(_response);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 _response.StatusCode = HttpStatusCode.InternalServerError;
                 _response.IsSuccess = false;

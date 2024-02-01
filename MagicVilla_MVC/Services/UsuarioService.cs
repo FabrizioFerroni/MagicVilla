@@ -22,7 +22,7 @@ namespace MagicVilla_MVC.Services
 
             ApiRequest.ApiTipo = DS.ApiTipo.POST;
             ApiRequest.Datos = dto;
-            ApiRequest.Url = $"{_villaUrl}/api/usuario/login";
+            ApiRequest.Url = $"{_villaUrl}/api/v1/usuario/login";
 
             return SendAsync<T>(ApiRequest);
         }
@@ -33,7 +33,7 @@ namespace MagicVilla_MVC.Services
 
             ApiRequest.ApiTipo = DS.ApiTipo.POST;
             ApiRequest.Datos = dto;
-            ApiRequest.Url = $"{_villaUrl}/api/usuario/register";
+            ApiRequest.Url = $"{_villaUrl}/api/v1/usuario/register";
 
             return SendAsync<T>(ApiRequest);
         }

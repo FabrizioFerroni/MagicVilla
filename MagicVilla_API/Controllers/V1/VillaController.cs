@@ -7,11 +7,12 @@ using MagicVilla_API.Repositories.IRepositories;
 using System.Net;
 using Microsoft.AspNetCore.Authorization;
 
-namespace MagicVilla_API.Controllers
+namespace MagicVilla_API.Controllers.V1
 {
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     [Authorize]
+    [ApiVersion("1.0")]
     public class VillaController : ControllerBase
     {
         private readonly ILogger<VillaController> _logger;
@@ -70,7 +71,7 @@ namespace MagicVilla_API.Controllers
                 {
                     _response.StatusCode = HttpStatusCode.NotFound;
                     _response.IsSuccess = false;
-                    _response.ErrorMensaje = new List<string>() { "Villa no encontrada, no hubieron coincidencias" }; 
+                    _response.ErrorMensaje = new List<string>() { "Villa no encontrada, no hubieron coincidencias" };
                     return NotFound(_response);
                 }
 
@@ -80,7 +81,7 @@ namespace MagicVilla_API.Controllers
                 _response.StatusCode = HttpStatusCode.OK;
                 return Ok(_response);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 _response.StatusCode = HttpStatusCode.InternalServerError;
                 _response.IsSuccess = false;
@@ -129,7 +130,7 @@ namespace MagicVilla_API.Controllers
 
                 return StatusCode(StatusCodes.Status201Created, _response);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 _response.StatusCode = HttpStatusCode.InternalServerError;
                 _response.IsSuccess = false;
@@ -179,7 +180,7 @@ namespace MagicVilla_API.Controllers
 
                 return Ok(_response);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 _response.StatusCode = HttpStatusCode.InternalServerError;
                 _response.IsSuccess = false;
@@ -204,7 +205,7 @@ namespace MagicVilla_API.Controllers
                 {
                     _response.StatusCode = HttpStatusCode.NotFound;
                     _response.IsSuccess = false;
-                    _response.ErrorMensaje = new List<string>() { "Villa no encontrada, no hubieron coincidencias" }; 
+                    _response.ErrorMensaje = new List<string>() { "Villa no encontrada, no hubieron coincidencias" };
                     return NotFound(_response);
                 }
 
@@ -233,7 +234,7 @@ namespace MagicVilla_API.Controllers
 
                 return Ok(_response);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 _response.StatusCode = HttpStatusCode.InternalServerError;
                 _response.IsSuccess = false;
@@ -269,7 +270,7 @@ namespace MagicVilla_API.Controllers
 
                 return Ok(_response);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 _response.StatusCode = HttpStatusCode.InternalServerError;
                 _response.IsSuccess = false;
