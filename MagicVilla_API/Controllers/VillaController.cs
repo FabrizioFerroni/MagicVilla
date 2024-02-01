@@ -5,11 +5,13 @@ using MagicVilla_API.Models;
 using AutoMapper;
 using MagicVilla_API.Repositories.IRepositories;
 using System.Net;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MagicVilla_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class VillaController : ControllerBase
     {
         private readonly ILogger<VillaController> _logger;
@@ -31,6 +33,7 @@ namespace MagicVilla_API.Controllers
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
+        [Authorize]
         public async Task<ActionResult<ApiResponse>> GetVillas()
         {
             try
@@ -56,6 +59,7 @@ namespace MagicVilla_API.Controllers
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
+        [Authorize]
         public async Task<ActionResult<ApiResponse>> GetVilla(Guid id)
         {
             try
@@ -90,6 +94,7 @@ namespace MagicVilla_API.Controllers
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult<ApiResponse>> CreateVilla([FromBody] VillaCreateDto dto)
         {
             try
@@ -138,6 +143,7 @@ namespace MagicVilla_API.Controllers
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> UpdateVilla(Guid id, [FromBody] VillaUpdateDto dto)
         {
             try
@@ -187,6 +193,7 @@ namespace MagicVilla_API.Controllers
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> UpdatePartialVilla(Guid id, JsonPatchDocument<VillaUpdateDto> patchDocument)
         {
             try
@@ -240,6 +247,7 @@ namespace MagicVilla_API.Controllers
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> DeleteVilla(Guid id)
         {
             try

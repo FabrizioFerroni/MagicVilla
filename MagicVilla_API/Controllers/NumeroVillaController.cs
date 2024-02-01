@@ -6,11 +6,14 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace MagicVilla_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class NumeroVillaController : ControllerBase
     {
         private readonly ILogger<NumeroVillaController> _logger;
@@ -33,6 +36,7 @@ namespace MagicVilla_API.Controllers
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
+        [Authorize]
         public async Task<ActionResult<ApiResponse>> GetNumeroVillas()
         {
             try
@@ -60,6 +64,7 @@ namespace MagicVilla_API.Controllers
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
+        [Authorize]
         public async Task<ActionResult<ApiResponse>> GetNumeroVillaPorId(Guid id)
         {
             try
@@ -94,6 +99,7 @@ namespace MagicVilla_API.Controllers
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
+        [Authorize]
         public async Task<ActionResult<ApiResponse>> GetNumeroVillaPorVillaNro(int villanro)
         {
             try
@@ -128,6 +134,7 @@ namespace MagicVilla_API.Controllers
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult<ApiResponse>> CreateNumeroVilla([FromBody] NumeroVillaCreateRequest dto)
         {
             try
@@ -182,6 +189,7 @@ namespace MagicVilla_API.Controllers
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> UpdateNumeroVilla(Guid id, [FromBody] NumeroVillaUpdateRequest dto)
         {
             try
@@ -237,6 +245,7 @@ namespace MagicVilla_API.Controllers
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> UpdatePartialNumeroVilla(Guid id, JsonPatchDocument<NumeroVillaUpdateRequest> patchDocument)
         {
             try
@@ -300,6 +309,7 @@ namespace MagicVilla_API.Controllers
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> DeleteNumeroVilla(int VillaNro)
         {
             try

@@ -52,7 +52,7 @@ namespace MagicVilla_MVC.Controllers
                                             {
                                                 Text = v.Nombre,
                                                 Value = v.Id.ToString()
-                                            }); ;
+                                            });
             }
             return View(numeroVillaVM);
         }
@@ -66,7 +66,7 @@ namespace MagicVilla_MVC.Controllers
 
                 if (response != null && response.IsSuccess)
                 {
-                    TempData["exitoso"] = "Se creo un nuevo numero de villa";
+                    TempData["exitoso"] = response.Data;
                     return RedirectToAction(nameof(Index));
                 }
                 else
@@ -86,7 +86,7 @@ namespace MagicVilla_MVC.Controllers
                 {
                     Text = v.Nombre,
                     Value = v.Id.ToString()
-                }); ;
+                });
             }
 
             TempData["error"] = "Un Error Ocurrio al Crear el numero de villa";
@@ -131,7 +131,7 @@ namespace MagicVilla_MVC.Controllers
 
                 if (response != null && response.IsSuccess)
                 {
-                    TempData["exitoso"] = "Numero de villa actualizada con éxito";
+                    TempData["exitoso"] = response.Data;
                     return RedirectToAction(nameof(Index));
                 }
                 else
@@ -151,7 +151,7 @@ namespace MagicVilla_MVC.Controllers
                 {
                     Text = v.Nombre,
                     Value = v.Id.ToString()
-                }); ;
+                });
             }
             TempData["error"] = "Un Error Ocurrio al Actualizar el numero de villa";
             return View(model);
@@ -191,7 +191,7 @@ namespace MagicVilla_MVC.Controllers
             var response = await _numeroVillaService.Remover<ApiResponse>(modelo.NumeroVilla.VillaNro);
             if (response != null && response.IsSuccess)
             {
-                TempData["exitoso"] = "Numero Villa Eliminado Exitosamente";
+                TempData["exitoso"] = response.Data;
                 return RedirectToAction(nameof(Index));
             }
             TempData["error"] = "Un Error Ocurrio al Remover el numero de villa";

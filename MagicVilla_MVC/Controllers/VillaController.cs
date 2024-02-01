@@ -46,7 +46,7 @@ namespace MagicVilla_MVC.Controllers
 
                 if (response != null && response.IsSuccess)
                 {
-                    TempData["exitoso"] = "Se creo la villa con éxito!";
+                    TempData["exitoso"] = response.Data;
                     return RedirectToAction(nameof(Index));
                 }
             }
@@ -76,7 +76,7 @@ namespace MagicVilla_MVC.Controllers
 
                 if (response != null && response.IsSuccess)
                 {
-                    TempData["exitoso"] = "Se actualizo la villa con éxito!";
+                    TempData["exitoso"] = response.Data;
                     return RedirectToAction(nameof(Index));
                 }
             }
@@ -103,7 +103,7 @@ namespace MagicVilla_MVC.Controllers
 
                 if (response != null && response.IsSuccess)
                 {
-                TempData["exitoso"] = "Se removio la villa con éxito";
+                TempData["exitoso"] = response.Data;
                 return RedirectToAction(nameof(Index));
                 }
 
