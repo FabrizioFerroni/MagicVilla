@@ -38,6 +38,7 @@ namespace MagicVilla_API.Controllers.V1
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
         [Authorize]
+        [ResponseCache(CacheProfileName = "Default30")]
         public async Task<ActionResult<ApiResponse>> GetNumeroVillas()
         {
             try
@@ -66,6 +67,7 @@ namespace MagicVilla_API.Controllers.V1
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
         [Authorize]
+        [ResponseCache(CacheProfileName = "Default30")]
         public async Task<ActionResult<ApiResponse>> GetNumeroVillaPorId(Guid id)
         {
             try
@@ -101,6 +103,7 @@ namespace MagicVilla_API.Controllers.V1
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
         [Authorize]
+        [ResponseCache(CacheProfileName = "Default30")]
         public async Task<ActionResult<ApiResponse>> GetNumeroVillaPorVillaNro(int villanro)
         {
             try

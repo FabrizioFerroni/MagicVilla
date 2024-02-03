@@ -13,5 +13,6 @@ namespace MagicVilla_API.Models.Dto
         public bool IsSuccess { get; set; } = true;
         public List<String>? ErrorMensaje { get; set; }
         public object? Data { get; set; }
+        public int TotalPaginas { get; set; } = 0;
     }
 }

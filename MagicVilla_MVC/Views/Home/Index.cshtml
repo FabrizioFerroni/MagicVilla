@@ -1,11 +1,11 @@
 ﻿@using Microsoft.AspNetCore.Components;
-@model IEnumerable<MagicVilla_MVC.Models.Dto.VillaDto>
+@model MagicVilla_MVC.Models.ViewModel.VillaPaginadoViewModel;
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Inicio";
 }
 
 <div class="row" style="--bs-gutter-x:0">
-    @foreach (var villa in Model)
+    @foreach (var villa in Model.VillaList)
     {
             <div class="p-4 col-md-12 col-lg-6">
                <div class="row" style="border-radius:20px; border: 1px solid">
@@ -36,3 +36,21 @@
             </div>
     }
 </div>
+
+<a asp-action="Index"
+   asp-route-page="@(1)" class="btn btn-outline-primary  000000">
+    <i class="bi bi-skip-start-fill"></i>
+</a>
+<a asp-action="Index"
+   asp-route-page="@(Model.PageNumber - 1)" class="btn btn-outline-primary outnone @Model.Previo">
+    Anterior
+</a>
+<span>Pagina @Model.PageNumber de @Model.TotalPaginas </span>
+<a asp-action="Index"
+   asp-route-page="@(Model.PageNumber + 1)" class="btn btn-outline-primary outnone @Model.Siguiente">
+    Siguiente
+</a>
+<a asp-action="Index"
+   asp-route-page="@Model.TotalPaginas" class="btn btn-outline-primary outnone">
+    <i class="bi bi-skip-end-fill"></i>
+</a>

@@ -6,6 +6,7 @@ using AutoMapper;
 using MagicVilla_API.Repositories.IRepositories;
 using System.Net;
 using Microsoft.AspNetCore.Authorization;
+using MagicVilla_API.Models.Especificaciones;
 
 namespace MagicVilla_API.Controllers.V1
 {
@@ -30,6 +31,7 @@ namespace MagicVilla_API.Controllers.V1
 
 
         [HttpGet]
+        [ResponseCache(CacheProfileName = "Default30")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
@@ -55,11 +57,39 @@ namespace MagicVilla_API.Controllers.V1
             }
         }
 
+        [HttpGet("paginate")]
+        [ResponseCache(CacheProfileName = "Default30")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
+        [AllowAnonymous]
+        public ActionResult<ApiResponse> GetVillaPaginado([FromQuery] Parametros parametros)
+        {
+            try
+            {
+                var villaList = _villaRepo.ObtenerTodosPaginados(parametros);
+                var mapper = _mapper.Map<IEnumerable<VillaDto>>(villaList);
+                _logger.LogInformation("Se obtuvieron todas las villas");
+                _response.Data = mapper;
+                _response.TotalPaginas = villaList.MetaData.TotalPages;
+                _response.StatusCode = HttpStatusCode.OK;
+                return Ok(_response);
+            } catch(Exception ex)
+            {
+                _response.StatusCode = HttpStatusCode.InternalServerError;
+                _response.IsSuccess = false;
+                _response.ErrorMensaje = new List<string>() { ex.ToString() };
+                return StatusCode(StatusCodes.Status500InternalServerError, _response);
+            }
+        }
+
         [HttpGet("{id}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
+        [ResponseCache(CacheProfileName = "Default30")]
         [Authorize]
         public async Task<ActionResult<ApiResponse>> GetVilla(Guid id)
         {

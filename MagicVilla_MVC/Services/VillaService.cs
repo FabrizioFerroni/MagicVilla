@@ -61,6 +61,22 @@ namespace MagicVilla_MVC.Services
             return SendAsync<T>(ApiRequest);
         }
 
+        public Task<T> ObtenerTodosPaginados<T>(string token, int pageNumber = 1, int pageSize = 4)
+        {
+            var ApiRequest = new ApiRequest();
+
+            ApiRequest.ApiTipo = DS.ApiTipo.GET;
+            ApiRequest.Url = $"{_villaUrl}/api/v1/villa/paginate";
+            ApiRequest.Token = token;
+            ApiRequest.Parametros = new Parametros()
+            {
+                PageNumber = pageNumber,
+                PageSize = pageSize
+            };
+
+            return SendAsync<T>(ApiRequest);
+        }
+
         public Task<T> Remover<T>(string id, string token)
         {
             var ApiRequest = new ApiRequest();
