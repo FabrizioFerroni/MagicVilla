@@ -514,3 +514,5 @@ msbuild.wrn
 
 # Visual Studio 2015
 .vs/
+/MagicVilla_API/appsettings.example.Development.json
+/MagicVilla_MVC/appsettings.template.Development.json
