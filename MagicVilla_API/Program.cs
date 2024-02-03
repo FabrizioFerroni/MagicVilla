@@ -13,8 +13,6 @@ using MagicVilla_API.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers(options =>
 {
     options.CacheProfiles.Add("Default30", new CacheProfile
@@ -22,7 +20,7 @@ builder.Services.AddControllers(options =>
         Duration = 30
     }); ;
 }).AddNewtonsoftJson();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options => {
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -91,7 +89,23 @@ builder.Services.AddDbContext<VillaDbContext>(option =>
 }
 );
 
-builder.Services.AddIdentity<UsuarioAplicacion, IdentityRole>().AddEntityFrameworkStores<VillaDbContext>();
+builder.Services.AddIdentity<UsuarioAplicacion, IdentityRole>(config =>
+{
+    config.User.RequireUniqueEmail = true;
+    config.Tokens.AuthenticatorIssuer = "JWT";
+    config.SignIn.RequireConfirmedEmail = true;
+    config.SignIn.RequireConfirmedAccount = true;
+
+    config.Password.RequiredLength = 8;
+    config.Password.RequiredUniqueChars = 3;
+    config.Password.RequireNonAlphanumeric = true;
+    config.Password.RequireUppercase = true;
+    config.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._";
+
+    config.Lockout.AllowedForNewUsers = true;
+    config.Lockout.MaxFailedAccessAttempts = 3;
+    config.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
+}).AddEntityFrameworkStores<VillaDbContext>();
 
 builder.Services.AddAutoMapper(typeof(MappingConfig));
 
@@ -121,8 +135,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(options =>
     {
-        options.SwaggerEndpoint("/swagger/v1/swagger.json", "MagicVilla V1");
-        options.SwaggerEndpoint("/swagger/v2/swagger.json", "MagicVilla V2");
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "Magic Villa V1");
+        options.SwaggerEndpoint("/swagger/v2/swagger.json", "Magic Villa V2");
     });
     app.UseSwaggerUI();
 }

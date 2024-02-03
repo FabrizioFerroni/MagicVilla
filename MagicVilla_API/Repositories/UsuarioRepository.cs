@@ -56,7 +56,6 @@ namespace MagicVilla_API.Repositories
                 };
             }
 
-            // Si el usuario Existe Generamos el JWT Token
             var roles = await _userManager.GetRolesAsync(usuario);
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(secretKey);
@@ -65,7 +64,7 @@ namespace MagicVilla_API.Repositories
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, usuario.UserName.ToString()),
+                    new Claim(ClaimTypes.Name, usuario.UserName),
                     new Claim(ClaimTypes.Email, usuario.Email),
                     new Claim(ClaimTypes.Role, roles.FirstOrDefault())
                 }),

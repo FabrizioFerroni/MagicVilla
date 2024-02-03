@@ -55,7 +55,6 @@ namespace MagicVilla_API.Controllers.V1
                 _response.StatusCode = HttpStatusCode.InternalServerError;
                 _response.IsSuccess = false;
                 _response.ErrorMensaje = new List<string>() { ex.ToString() };
-                // return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError, _response);
 
             }
@@ -273,7 +272,6 @@ namespace MagicVilla_API.Controllers.V1
                 {
                     _response.StatusCode = HttpStatusCode.BadRequest;
                     _response.IsSuccess = false;
-                    // _response.ErrorMensaje = new List<String>() {  };
                     _response.Data = ModelState;
                     return BadRequest(_response);
                 }

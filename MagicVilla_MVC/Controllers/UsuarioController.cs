@@ -54,7 +54,6 @@ namespace MagicVilla_MVC.Controllers
 
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
-                //Session
                 HttpContext.Session.SetString(DS.SessionToken, objeto.Token);
 
                 return RedirectToAction("Index", "Home");
@@ -88,7 +87,7 @@ namespace MagicVilla_MVC.Controllers
         {
             await HttpContext.SignOutAsync();
             HttpContext.Session.SetString(DS.SessionToken, "");
-            return RedirectToAction("login");
+            return RedirectToAction("Index", "Home");
         }
 
         public IActionResult AccesoDenegado()

@@ -247,7 +247,6 @@ namespace MagicVilla_API.Controllers.V1
                 {
                     _response.StatusCode = HttpStatusCode.BadRequest;
                     _response.IsSuccess = false;
-                    // _response.ErrorMensaje = new List<String>() {  };
                     _response.Data = ModelState;
                     return BadRequest(_response);
                 }

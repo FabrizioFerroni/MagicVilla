@@ -47,7 +47,6 @@ namespace MagicVilla_MVC.Services
 
                 if(apiRequest.Datos!= null)
                 {
-                    // Es un post o un put
                     message.Content = new StringContent(JsonConvert.SerializeObject(apiRequest.Datos), Encoding.UTF8, "application/json");
                 }
 
