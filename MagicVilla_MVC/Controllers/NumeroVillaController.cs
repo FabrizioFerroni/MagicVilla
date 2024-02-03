@@ -8,6 +8,8 @@ using Newtonsoft.Json;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MagicVilla_Utils;
 using System.Reflection;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace MagicVilla_MVC.Controllers
 {
@@ -25,6 +27,7 @@ namespace MagicVilla_MVC.Controllers
             _mapper = mapper;
         }
 
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Index()
         {
             List<NumeroVillaResponse> numeroVillaList = new();
@@ -40,6 +43,7 @@ namespace MagicVilla_MVC.Controllers
             return View(numeroVillaList);
         }
 
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Crear()
         {
             NumeroVillaViewModel numeroVillaVM = new();
@@ -60,6 +64,7 @@ namespace MagicVilla_MVC.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Crear(NumeroVillaViewModel model)
         {
             string token = HttpContext.Session.GetString(DS.SessionToken);
@@ -96,6 +101,7 @@ namespace MagicVilla_MVC.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Actualizar(string id)
         {
             NumeroVillaUpdateViewModel numeroVillaVM = new();
@@ -162,6 +168,7 @@ namespace MagicVilla_MVC.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Remover(string id)
         {
             NumeroVillaDeleteViewModel numeroVillaVM = new();

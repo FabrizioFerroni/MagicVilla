@@ -1,14 +1,17 @@
 ﻿using MagicVilla_API.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace MagicVilla_API.Data
 {
-    public class VillaDbContext : DbContext
+    public class VillaDbContext : IdentityDbContext<UsuarioAplicacion>
     {
+
         public VillaDbContext(DbContextOptions<VillaDbContext> options) : base(options)
         {
         }
 
+        public DbSet<UsuarioAplicacion> UsuariosAplicacion { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Villa> Villas { get; set; }
         public DbSet<NumeroVilla> NumeroVillas { get; set; }
@@ -17,7 +20,7 @@ namespace MagicVilla_API.Data
         {
             Guid nuevoGuid = Guid.NewGuid();
             Guid nuevoGuid2 = Guid.NewGuid();
-
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Villa>().HasData(
                 new Villa
                 {
